@@ -13,7 +13,14 @@ import HeroBanner from '~/components/HomeView/HeroBanner.vue'
 import Productions from '~/components/HomeView/Productions.vue'
 
 useHead({
-  title: 'Portfolio - Jules',
+  title: 'Portfolio - Jules JARDRI',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Bienvenue sur mon portfolio ! Découvrez mon parcours, mes compétences et mes projets en un coup d\'oeil',
+    },
+  ],
 })
 </script>
 
