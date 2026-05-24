@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Cedric AUBARD",
+    "companyName": "Adista",
+    "comment": "Jules a effectué son stage à l'agence bordelaise auprès de nos équipes systèmes, réseaux et cyber sécurité.<br>Très à l'écoute et passionné par le domaine informatique, il a bien appréhendé nos différents services et sera le bienvenue pour ses prochains stages.<br>Il développe déjà et maîtrise déjà plusieurs langages mais il a été aussi attiré par la partie Cyber.<br>J'espère qu'on le retrouvera dans quelques années dans nos équipes !",
+    "profilePicture": "AubardC.jpeg",
+    "companyLogo": "adista.svg"
+  },
+  {
+    "name": "Justine VIDAL",
+    "companyName": "PJC",
+    "comment": "Lors de son passage chez PJC, Jules nous a accompagnés dans le lancement d'un projet de création de site web.<br>Grâce à ses compétences en développement et référencement déjà poussées et à sa maitrise de nombreux langages, il a su nous conseiller et être force de proposition dans l'adaptation des maquettes graphiques pour le futur site (HTML).<br>Son analyse et son esprit synthétique lui ont permis d'appréhender les besoins de l'agence et du client et de s'intégrer parfaitement dans l'équipe.",
+    "profilePicture": "VidalJ.jpeg",
+    "companyLogo": "pjc.png"
+  },
+  {
+    "name": "Charles DESOBRY",
+    "companyName": "Definima",
+    "comment": "Jules a réalisé un stage d'immersion dans notre agence web en 2024.<br>Malgré son jeune âge, il a fait preuve d'une grande maturité et d'une connaissance approfondie des langages de programmation.<br>L'informatique est dans son ADN et il ne pourra que performer si il entreprend des études dans ce domaine.<br>Nous sommes prêts à l’accueillir pour ses futurs stages en études supérieures.",
+    "profilePicture": "DesobryC.jpeg",
+    "companyLogo": "definima.svg"
+  }
+]

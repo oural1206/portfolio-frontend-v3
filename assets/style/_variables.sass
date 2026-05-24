@@ -1,0 +1,55 @@
+$color-dark: #001E1D
+$color-primary: #004643
+$color-secondary: #ABD1C6
+$color-text: rgba(0, 70, 67, 0.8)
+$color-grey: #E8E4E6
+$color-white: #FFFFFE
+$color-highlight: #F9BC60
+$color-wrong: #E16162
+$overlay-dark: rgba(0, 30, 29, 0.75)
+$border-soft: rgba(171, 209, 198, 0.22)
+$border-primary-soft: rgba(0, 70, 67, 0.16)
+
+$filter-dark: invert(10%) sepia(20%) saturate(2418%) hue-rotate(134deg) brightness(95%) contrast(104%)
+$filter-primary: invert(22%) sepia(29%) saturate(1293%) hue-rotate(129deg) brightness(91%) contrast(101%)
+$filter-secondary: invert(85%) sepia(8%) saturate(678%) hue-rotate(112deg) brightness(98%) contrast(82%)
+$filter-grey: invert(91%) sepia(9%) saturate(53%) hue-rotate(277deg) brightness(103%) contrast(88%)
+$filter-white: invert(100%) sepia(78%) saturate(573%) hue-rotate(301deg) brightness(112%) contrast(105%)
+$filter-highlight: invert(84%) sepia(13%) saturate(1983%) hue-rotate(334deg) brightness(99%) contrast(97%)
+$filter-wrong: invert(42%) sepia(34%) saturate(1028%) hue-rotate(309deg) brightness(107%) contrast(83%)
+
+$xs: 500px
+$s: 640px
+$m: 768px
+$ml: 917px
+$l: 1024px
+$xl: 1280px
+
+@mixin padding
+  padding: 10rem 15rem
+  @media (max-width: 1600px)
+    padding: 7.5rem 10rem
+  @media (max-width: $l)
+    padding: 5rem 10rem
+  @media (max-width: $ml)
+    padding: 5rem
+  @media (max-width: $m)
+    padding: 3.75rem
+  @media (max-width: $xs)
+    padding: 3.75rem 2rem
+
+@mixin section-title-dark
+  color: $color-highlight
+
+@mixin section-title-light
+  color: $color-primary
+
+@mixin surface-dark
+  background: rgba(0, 30, 29, 0.35)
+  border: 1px solid $border-soft
+  box-shadow: 0 1.5rem 4rem rgba(0, 30, 29, 0.18)
+
+@mixin surface-light
+  background: rgba(255, 255, 254, 0.26)
+  border: 1px solid $border-primary-soft
+  box-shadow: 0 1.25rem 3rem rgba(0, 70, 67, 0.08)

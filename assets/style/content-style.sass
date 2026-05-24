@@ -1,0 +1,40 @@
+@use "variables" as *
+
+@mixin content-style
+  display: flex
+  flex-direction: column
+  gap: 1.1rem
+  h1, h2
+    color: $color-highlight
+    margin: 2rem 0 0.5rem 0
+    font-weight: 900
+  h3
+    color: $color-white
+    margin-top: 1.25rem
+  p
+    color: rgba(171, 209, 198, 0.9)
+    line-height: 1.75
+  ul, ol
+    border-left: 0.25rem solid $color-highlight
+    display: grid
+    gap: 0.5rem
+    margin: 0.75rem 0
+    padding-left: 1.25rem
+  li
+    line-height: 1.55
+  img
+    display: block
+    min-width: 25%
+    max-width: 75%
+    max-height: 50vh
+    margin: 2rem auto auto auto
+    border-radius: 0.5rem
+  span.center
+    display: block
+    width: 100%
+    font-weight: 400
+    text-align: center
+    margin: 1rem 0 2rem 0
+  @media (max-width: $l)
+    img
+        max-width: 100%

@@ -1,0 +1,40 @@
+[
+  {
+    "categoryName": "Electronique",
+    "skills": [
+      { "name": "C++", "icon": "cpp.svg" },
+      { "name": "Arduino", "icon": "arduino.svg" },
+      { "name": "Raspberry Pi", "icon": "raspberrypi.svg" },
+      { "name": "Conceptions electroniques", "icon": "easyeda.svg" }
+    ]
+  },
+  {
+    "categoryName": "Programmation &<br>web",
+    "skills": [
+      { "name": "Nuxt (Vue.js)", "icon": "nuxtjs.svg" },
+      { "name": "AdonisJS", "icon": "adonisjs.svg" },
+      { "name": "Lua", "icon": "lua.svg" },
+      { "name": "PHP", "icon": "php.svg" },
+      { "name": "Git", "icon": "git.svg" },
+      { "name": "VS Code / workflow dev", "icon": "github.svg" }
+    ]
+  },
+  {
+    "categoryName": "Systemes embarques &<br>tests",
+    "skills": [
+      { "name": "Mesure et validation", "icon": "arduino.svg" },
+      { "name": "Prototypage", "icon": "raspberrypi.svg" },
+      { "name": "Bash", "icon": "bash.svg" },
+      { "name": "Docker", "icon": "docker.svg" }
+    ]
+  },
+  {
+    "categoryName": "Conception &<br>creation",
+    "skills": [
+      { "name": "Figma", "icon": "figma.svg" },
+      { "name": "Fusion 360 / impression 3D", "icon": "fusion360.svg" },
+      { "name": "DaVinci Resolve", "icon": "davinciresolve.svg" },
+      { "name": "Lightroom / photo", "icon": "lightroom.svg" }
+    ]
+  }
+]

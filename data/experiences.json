@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Snapp'",
+    "image": "snapp-wordmark.svg",
+    "year": "2022",
+    "description": "Stage dans le cadre du<br>parcours scolaire de 3ème<br>(Bx - Janvier 2022)",
+    "title": "Agence de développement d’applications mobiles.",
+    "text": "J’ai découvert le fonctionnement d’une entreprise qui développe des solutions digitales et plus largement, la vie en entreprise.<br><br>J’ai appris à développer des applications sous IOS (Swift, Xcode) et à gagner en méthode et productivité.<br><br>J’ai apprécié ce stage et la vie équipe, toutefois, je me suis rendu compte que je veux aller plus loin que simplement développer."
+  },
+  {
+    "name": "Sgami",
+    "image": "sgami.svg",
+    "year": "2022",
+    "description": "Stage volontaire par<br>le biais du plan 10k jeunes<br>(Bx - Juillet 2022)",
+    "title": "Service de renseignement du Ministère de l'Intérieur.",
+    "text": "Ce stage m’a permis de découvrir le fonctionnement du service local du Ministère, notamment la cellule de la DSIC.<br><br>Voici toutes les cellules que j’ai parcourues : Cellule Architecture et Sécurité des Systèmes d’Information,  Cellule Réseaux et Télécommunications, Cellule Support Utilisateurs, Cellule Développement et Intégration, Cellule Sécurité des Systèmes d’Information, Cellule de gestion de crise, …<br><br>Ce stage a été très diversifié et j’ai découvert différents métiers très interessants. Cela m’a donné envie d’en savoir plus sur la cyber sécurité."
+  },
+  {
+    "name": "Adista",
+    "image": "adista-wordmark.svg",
+    "year": "2023",
+    "description": "Stage volontaire<br>d'une semaine<br>(Bx - Juin 2023)",
+    "title": "Opérateur de services hébergés",
+    "text": "Mon stage au sein de l'entreprise Adista du groupe Inherente m'a permis d'en apprendre plus sur les solutions de services hébergés, aussi bien pour les grandes entreprises que pour les PME et TPE.<br><br>J'ai eu l'opportunité d'échanger avec différentes équipes, notamment l'équipe commerciale, l'équipe de support, une employée de cyberprotect, et surtout l'équipe du \"build\" qui est chargée du déploiement et de la gestion des services chez les clients.<br>J'ai eu la chance d'accompagner un techniciens dans le Datacenter de TDF à Bouliac pour effectuer des changements de switchs et préparer une nouvelle baie équipée de firewall pour un client.<br><br>Ce stage m'a permis d'acquérir de précieuses compétences dans le domaine des réseaux informatiques, ainsi que de découvrir les nombreux outils disponibles pour administrer et sécuriser les systèmes informatiques des entreprises."
+  },
+  {
+    "name": "PJC",
+    "image": "pjc.png",
+    "year": "2023",
+    "description": "Stage volontaire<br>de deux semaines<br>(Bx - Juillet 2023)",
+    "title": "Agence de communication globale",
+    "text": "Lors de ce stage, j'ai participé à la refonte d'un site Internet en proposant des solutions pour améliorer le design, l'ergonomie et le référencement du site.<br><br>Grâce à mes compétences en codage, ainsi que mon engouement pour l'UI et l'UX j'ai pu mettre au concret mes idées et également créer de nouveaux effets et animations du fait de mon intérêt pour le \"creative coding\".<br><br>Cette expérience m'a permis de compléter mes compétences techniques notamment en SEO, tout en nourrissant ma créativité. J'ai particulièrement apprécié travailler et échanger avec l'équipe de l'agence qui m'a inspiré."
+  },
+  {
+    "name": "Definima",
+    "image": "definima-wordmark.svg",
+    "year": "2024",
+    "description": "Stage volontaire<br>d'une semaine<br>(Bx - Février 2024)",
+    "title": "Agence digitale",
+    "text": "Durant ce stage j'ai pu faire plusieurs ajouts de fonctionnalités sur un site web avec la stack React Next Symfony que je n'ai pas du tout l'habitude d'utiliser mais que j'ai donc pu apprendre.<br>En complément, j'ai pu retravailler certains plugins wordpress pour quelques sites.<br><br>Qui dit agence digitale dit également une équipe d'UI/UX designers, j'ai donc eu aussi comme tâche de commencer le maquettage d'une section d'un site vitrine.<br><br>Ce stage a été très enrichissant et m'a permis de découvrir de nouvelles technologies et le fonctionnement d'une boîte spécialisée dans la création digitale."
+  }
+]
