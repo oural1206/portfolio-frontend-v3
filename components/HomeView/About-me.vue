@@ -5,10 +5,10 @@
    ========================================================================== */
 
 const personalBalance = [
+  'drone',
+  'vidéos',
   'running',
   'vélo',
-  'vidéos',
-  'drone',
 ]
 </script>
 
@@ -25,13 +25,13 @@ const personalBalance = [
       <article class="intro-card">
         <h3>Mon parcours...</h3>
         <p>
-          Moi c’est Jules, un jeune étudiant passionné par la <strong>programmation</strong> depuis petit, ainsi que par l’électronique et la conception mécatronique depuis quelques années.
+          Moi c’est Jules, un jeune étudiant passionné par la <strong>programmation</strong> depuis petit, ainsi que par <strong>l’électronique et la conception mécatronique</strong> depuis quelques années.
         </p>
         <p>
           <strong>À l’âge de 10 ans</strong>, j’ai débuté la programmation par blocs avec la robotique Lego EV3, puis j’ai découvert Python et Lua à 12 ans en voulant aller plus loin.
         </p>
         <p>
-          Aujourd’hui, je garde cette même logique : <strong>apprendre par projet</strong>, tester, corriger et fabriquer plein de petits prototypes dans ma chambre <i>(<a>qui ressemble plus à un atelier</a>)</i>.
+          Aujourd’hui, je garde cette même logique : <strong>apprendre par projet</strong>, tester, corriger et fabriquer plein de petits prototypes dans ma chambre <i>(<ImageModal src="/assets/images/atelier-placeholder.svg" alt="Apercu de mon atelier" title="Ma chambre-atelier" description="Un exemple rapide du type d'image que ce lien peut ouvrir. Remplace simplement le fichier par une vraie photo quand tu veux.">qui ressemble plus à un atelier</ImageModal>)</i>.
         </p>
       </article>
 
@@ -59,7 +59,7 @@ const personalBalance = [
           Cette année, j’ai intégré le <strong>BUT Génie Électrique et Informatique Industrielle</strong> (GEII), qui était mon premier choix.<br>
           J’ai choisi de m’orienter vers le parcours <a href="https://www.iut.u-bordeaux.fr/geii/but-parcours-aii/" target="_blank"><strong>Automatisme et Informatique Industrielle</strong> (AII)</a>, pour garder un lien fort avec la programmation.
           <br><br>
-          En parallèle, je suis aussi un double diplôme universitaire <a href="https://www.iut.u-bordeaux.fr/formations/tss/" target="_blank"><strong>Technologies au Service de la Santé</strong></a>, qui mêle l’informatique, l’électronique et la mécanique pour concevoir des solutions utiles.
+          En parallèle, je m'investis dans un double diplôme universitaire <a href="https://www.iut.u-bordeaux.fr/formations/tss/" target="_blank"><strong>Technologies au Service de la Santé</strong></a>, qui mêle l’informatique, l’électronique et la mécanique pour concevoir des solutions innovantes.
         </p>
       </article>
       <article class="project-card">
@@ -67,7 +67,7 @@ const personalBalance = [
         <h3>Mon projet professionnel</h3>
         <p>
           Je compte me spécialiser dans le domaine de l’<strong>automatisation</strong>.
-          <br>
+          <br><br>
           J’aimerais garder un équilibre entre la programmation et <strong>l’ingénierie terrain</strong>, en travaillant en bureau d’études mais aussi sur la mise en service et le dépannage.
         </p>
       </article>
@@ -123,8 +123,8 @@ const personalBalance = [
     grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr)
     gap: 1.25rem
     .project-card
-      background: rgba(0, 70, 67, 0.08)
-      border: 1px solid rgba(0, 70, 67, 0.14)
+      background: $surface-primary-soft
+      border: 1px solid $border-primary
       border-radius: 0.85rem
       display: flex
       flex-direction: column
@@ -149,7 +149,7 @@ const personalBalance = [
         line-height: 1.65
   .balance-card
     background-color: $color-primary
-    border: 1px solid rgba(0, 70, 67, 0.18)
+    border: 1px solid $border-primary
     border-radius: 0.85rem
     color: $color-secondary
     display: flex
@@ -169,7 +169,7 @@ const personalBalance = [
       line-height: 1.12
       margin-bottom: 1rem
     p
-      color: rgba(171, 209, 198, 0.86)
+      color: $color-text-on-dark
       font-size: 0.96rem
       line-height: 1.6
       strong
@@ -181,12 +181,12 @@ const personalBalance = [
       list-style: none
       margin-top: 1.5rem
       li
-        background-color: rgba(255, 255, 254, 0.08)
-        border: 1px solid rgba(171, 209, 198, 0.18)
+        background-color: $surface-white-soft
+        border: 1px solid $border-soft
         border-radius: 999px
         color: $color-secondary
         font-size: 0.82rem
-        font-weight: 850
+        font-weight: 700
         padding: 0.42rem 0.65rem
   @media (max-width: $l)
     .about-bento

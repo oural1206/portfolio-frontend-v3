@@ -1,0 +1,14 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#ABD1C6"/>
+  <rect x="104" y="126" width="992" height="548" rx="28" fill="#004643"/>
+  <rect x="154" y="188" width="520" height="308" rx="16" fill="#FFFFFE" fill-opacity="0.16"/>
+  <rect x="710" y="188" width="334" height="84" rx="14" fill="#F9BC60"/>
+  <rect x="710" y="304" width="334" height="192" rx="14" fill="#FFFFFE" fill-opacity="0.12"/>
+  <rect x="154" y="532" width="890" height="76" rx="14" fill="#001E1D" fill-opacity="0.34"/>
+  <circle cx="230" cy="265" r="34" fill="#F9BC60"/>
+  <path d="M306 354H512" stroke="#ABD1C6" stroke-width="20" stroke-linecap="round"/>
+  <path d="M306 410H586" stroke="#ABD1C6" stroke-width="20" stroke-linecap="round"/>
+  <path d="M754 368H1000" stroke="#ABD1C6" stroke-width="18" stroke-linecap="round"/>
+  <path d="M754 424H928" stroke="#ABD1C6" stroke-width="18" stroke-linecap="round"/>
+  <text x="600" y="606" text-anchor="middle" fill="#ABD1C6" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">Image a remplacer par la photo de l'atelier</text>
+</svg>

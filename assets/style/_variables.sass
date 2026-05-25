@@ -1,14 +1,46 @@
+/* ============================================================================
+ VARIABLES GLOBALES
+ Centralise les couleurs, effets et breakpoints reutilises dans le portfolio.
+ ========================================================================== */
+
+// ===================== COULEURS PRINCIPALES ===================== //
+
 $color-dark: #001E1D
 $color-primary: #004643
 $color-secondary: #ABD1C6
-$color-text: rgba(0, 70, 67, 0.8)
 $color-grey: #E8E4E6
 $color-white: #FFFFFE
 $color-highlight: #F9BC60
 $color-wrong: #E16162
+
+// ===================== TEXTES ===================== //
+
+$color-text: rgba(0, 70, 67, 0.8)
+$color-text-transparent: rgba(0, 70, 67, 0.14)
+$color-text-on-dark: rgba(171, 209, 198, 0.86)
+
+// ===================== SURFACES, BORDURES ET OMBRES ===================== //
+
 $overlay-dark: rgba(0, 30, 29, 0.75)
-$border-soft: rgba(171, 209, 198, 0.22)
-$border-primary-soft: rgba(0, 70, 67, 0.16)
+$header-primary: rgba(0, 70, 67, 0.94)
+$surface-dark: rgba(0, 30, 29, 0.22)
+$surface-dark-strong: rgba(0, 30, 29, 0.42)
+$surface-primary-soft: rgba(0, 70, 67, 0.08)
+$surface-primary-medium: rgba(0, 70, 67, 0.25)
+$surface-white-soft: rgba(255, 255, 254, 0.08)
+$surface-white-glass: rgba(255, 255, 254, 0.26)
+$surface-transparent: rgba(0, 0, 0, 0)
+$border-soft-subtle: rgba(171, 209, 198, 0.25)
+$border-soft: rgba(171, 209, 198, 0.2)
+$border-primary: rgba(0, 70, 67, 0.16)
+$shadow-primary-soft: rgba(0, 70, 67, 0.08)
+$shadow-dark: rgba(0, 30, 29, 0.22)
+$shadow-dark-strong: rgba(0, 30, 29, 0.35)
+$highlight-transparent: rgba(249, 188, 96, 0)
+$highlight-glow: rgba(249, 188, 96, 0.22)
+$highlight-mark: rgba(249, 188, 96, 0.4)
+$highlight-strong: rgba(249, 188, 96, 0.65)
+$color-primary-gradient: rgba(0, 70, 67, 0.6)
 
 $filter-dark: invert(10%) sepia(20%) saturate(2418%) hue-rotate(134deg) brightness(95%) contrast(104%)
 $filter-primary: invert(22%) sepia(29%) saturate(1293%) hue-rotate(129deg) brightness(91%) contrast(101%)
@@ -18,12 +50,16 @@ $filter-white: invert(100%) sepia(78%) saturate(573%) hue-rotate(301deg) brightn
 $filter-highlight: invert(84%) sepia(13%) saturate(1983%) hue-rotate(334deg) brightness(99%) contrast(97%)
 $filter-wrong: invert(42%) sepia(34%) saturate(1028%) hue-rotate(309deg) brightness(107%) contrast(83%)
 
+// ===================== BREAKPOINTS ===================== //
+
 $xs: 500px
 $s: 640px
 $m: 768px
 $ml: 917px
 $l: 1024px
 $xl: 1280px
+
+// ===================== MIXINS ===================== //
 
 @mixin padding
   padding: 10rem 15rem
@@ -39,17 +75,17 @@ $xl: 1280px
     padding: 3.75rem 2rem
 
 @mixin section-title-dark
-  color: $color-highlight
+  color: $color-white
 
 @mixin section-title-light
   color: $color-primary
 
 @mixin surface-dark
-  background: rgba(0, 30, 29, 0.35)
+  background: $surface-dark
   border: 1px solid $border-soft
-  box-shadow: 0 1.5rem 4rem rgba(0, 30, 29, 0.18)
+  box-shadow: 0 1.5rem 4rem $shadow-dark
 
 @mixin surface-light
-  background: rgba(255, 255, 254, 0.26)
-  border: 1px solid $border-primary-soft
-  box-shadow: 0 1.25rem 3rem rgba(0, 70, 67, 0.08)
+  background: $surface-white-glass
+  border: 1px solid $border-primary
+  box-shadow: 0 1.25rem 3rem $shadow-primary-soft

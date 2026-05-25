@@ -10,18 +10,33 @@ const { data: personalProjects } = await useAsyncData(() => queryCollection('per
 
 const currentProduction: any = ref(null)
 const projectSliders = ref<Record<string, HTMLElement | null>>({})
+const projectSliderState = ref<Record<string, { canScrollLeft: boolean, canScrollRight: boolean }>>({
+  formation: { canScrollLeft: false, canScrollRight: false },
+  personal: { canScrollLeft: false, canScrollRight: false },
+})
 
-// ===================== COMPETENCES GEII ===================== //
+function setProjectSlider(key: string, element: Element | ComponentPublicInstance | null) {
+  if (element instanceof HTMLElement) {
+    projectSliders.value[key] = element
+  }
+  else {
+    projectSliders.value[key] = null
+  }
 
-const geiiCompetences = [
-  'Concevoir une solution technique a partir d’un besoin.',
-  'Verifier par des tests, des mesures et une procedure claire.',
-  'Documenter une demarche et presenter un resultat.',
-  'Travailler en equipe et organiser les taches.',
-]
+  updateProjectSliderState(key)
+}
 
-function setProjectSlider(key: string, element: Element | null) {
-  projectSliders.value[key] = element as HTMLElement | null
+function updateProjectSliderState(key: string) {
+  const slider = projectSliders.value[key]
+
+  if (!slider) {
+    return
+  }
+
+  projectSliderState.value[key] = {
+    canScrollLeft: slider.scrollLeft > 8,
+    canScrollRight: slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 8,
+  }
 }
 
 function scrollProjectSlider(key: string, direction: number) {
@@ -34,6 +49,40 @@ function scrollProjectSlider(key: string, direction: number) {
   slider.scrollBy({
     left: direction * slider.clientWidth * 0.85,
     behavior: 'smooth',
+  })
+
+  window.setTimeout(() => updateProjectSliderState(key), 450)
+}
+
+onMounted(() => {
+  nextTick(() => {
+    resetAllProjectSliders()
+    updateProjectSliderState('formation')
+    updateProjectSliderState('personal')
+  })
+
+  window.setTimeout(() => {
+    resetAllProjectSliders()
+    updateAllProjectSliderStates()
+  }, 100)
+
+  window.addEventListener('resize', updateAllProjectSliderStates)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateAllProjectSliderStates)
+})
+
+function updateAllProjectSliderStates() {
+  updateProjectSliderState('formation')
+  updateProjectSliderState('personal')
+}
+
+function resetAllProjectSliders() {
+  Object.values(projectSliders.value).forEach((slider) => {
+    if (slider) {
+      slider.scrollLeft = 0
+    }
   })
 }
 
@@ -49,31 +98,36 @@ watch(currentProduction, (newValue) => {
 
 <template>
   <section id="projets" class="header-display projects-section">
-    <div class="section-heading">
-      <h2>Projets</h2>
-      <p>
-        Les projets de formation montrent les competences travaillees en BUT GEII. Les projets personnels montrent ce que je construis par curiosite et par autonomie.
-      </p>
+    <div class="section-heading center">
+      <span class="eyebrow">Projets</span>
+      <h2>Des réalisations concrètes</h2>
     </div>
 
-    <div class="project-block">
+    <div class="project-block formation-block">
       <div class="block-heading">
         <div>
           <h3>Projets de formation</h3>
-          <p>Competences GEII mobilisees : concevoir, verifier, documenter et travailler en equipe.</p>
+          <p>
+            Les projets de formation montrent les
+            <ImageModal dark-bg large src="/assets/images/competences-geii.png" title="Compétences du BUT GEII" description="Compétences du parcours AII mise en avant. Lecture par niveau d’année.">
+              competences travaillees en BUT GEII
+            </ImageModal>
+            et autres.
+          </p>
         </div>
-        <ul>
-          <li v-for="item in geiiCompetences" :key="item">
-            {{ item }}
-          </li>
-        </ul>
       </div>
 
       <div class="carousel-shell">
-        <button type="button" class="carousel-arrow left" aria-label="Voir les projets precedents" @click="scrollProjectSlider('formation', -1)">
+        <button
+          type="button"
+          class="carousel-arrow left"
+          :class="{ hidden: !projectSliderState.formation.canScrollLeft }"
+          aria-label="Voir les projets de formation precedents"
+          @click="scrollProjectSlider('formation', -1)"
+        >
           ‹
         </button>
-        <div :ref="element => setProjectSlider('formation', element)" class="cards-row">
+        <div :ref="element => setProjectSlider('formation', element)" class="cards-row" @scroll="updateProjectSliderState('formation')">
           <article
             v-for="(production, index) in formationProjects"
             :key="index"
@@ -85,31 +139,45 @@ watch(currentProduction, (newValue) => {
               GEII
             </div>
             <div class="content">
-              <span>{{ production.meta.type }}</span>
+              <span>{{ production.meta.type || 'Projet de formation' }}</span>
               <h4>{{ production.title }}</h4>
               <p v-html="production.description" />
             </div>
           </article>
         </div>
-        <button type="button" class="carousel-arrow right" aria-label="Voir les projets suivants" @click="scrollProjectSlider('formation', 1)">
+        <button
+          type="button"
+          class="carousel-arrow right"
+          :class="{ hidden: !projectSliderState.formation.canScrollRight }"
+          aria-label="Voir les projets de formation suivants"
+          @click="scrollProjectSlider('formation', 1)"
+        >
           ›
         </button>
       </div>
     </div>
 
-    <div class="project-block">
+    <span class="project-divider" aria-hidden="true" />
+
+    <div class="project-block personal-block">
       <div class="block-heading">
         <div>
           <h3>Projets personnels</h3>
-          <p>Des projets menes en dehors du cadre scolaire, pour apprendre en pratiquant.</p>
+          <p>Les projets personnels mettent en avant mes compétences acquises de manière <strong class="dark-bg">autodidacte</strong>.</p>
         </div>
       </div>
 
       <div class="carousel-shell">
-        <button type="button" class="carousel-arrow left" aria-label="Voir les projets precedents" @click="scrollProjectSlider('personal', -1)">
+        <button
+          type="button"
+          class="carousel-arrow left"
+          :class="{ hidden: !projectSliderState.personal.canScrollLeft }"
+          aria-label="Voir les projets personnels precedents"
+          @click="scrollProjectSlider('personal', -1)"
+        >
           ‹
         </button>
-        <div :ref="element => setProjectSlider('personal', element)" class="cards-row">
+        <div :ref="element => setProjectSlider('personal', element)" class="cards-row" @scroll="updateProjectSliderState('personal')">
           <article
             v-for="(production, index) in personalProjects"
             :key="index"
@@ -127,7 +195,13 @@ watch(currentProduction, (newValue) => {
             </div>
           </article>
         </div>
-        <button type="button" class="carousel-arrow right" aria-label="Voir les projets suivants" @click="scrollProjectSlider('personal', 1)">
+        <button
+          type="button"
+          class="carousel-arrow right"
+          :class="{ hidden: !projectSliderState.personal.canScrollRight }"
+          aria-label="Voir les projets personnels suivants"
+          @click="scrollProjectSlider('personal', 1)"
+        >
           ›
         </button>
       </div>
@@ -137,7 +211,7 @@ watch(currentProduction, (newValue) => {
       <div class="background" @click="currentProduction = null" />
       <div class="container">
         <NuxtImg class="close-btn" src="/assets/icons/cross.svg" alt="Icon fermer" @click="currentProduction = null" />
-        <span class="type">{{ currentProduction.meta.type }}</span>
+        <span class="type">{{ currentProduction.meta.type || 'Projet de formation' }}</span>
         <h1>{{ currentProduction.title }}</h1>
         <ul v-if="currentProduction?.meta.competences?.length" class="tags">
           <li v-for="(tag, tagIndex) in currentProduction.meta.competences" :key="tagIndex">
@@ -161,101 +235,137 @@ body.no-scroll
 
 .projects-section
   width: 100%
+  overflow-x: clip
   background-color: $color-primary
   color: $color-secondary
   display: flex
   flex-direction: column
-  gap: 7rem
+  gap: 3rem
   @include padding
   .section-heading
-    max-width: 55rem
     h2
-      margin-bottom: 1.5rem
       @include section-title-dark
     p
-      color: rgba(171, 209, 198, 0.86)
+      color: $color-text-on-dark
   .project-block
     display: flex
     flex-direction: column
-    gap: 2.5rem
-  .block-heading
-    display: grid
-    grid-template-columns: 1fr 1.2fr
-    gap: 3rem
-    align-items: start
-    h3
-      color: $color-white
-      font-size: 1.45rem
-      font-weight: 900
-      margin-bottom: 1rem
-    p
-      color: rgba(171, 209, 198, 0.82)
-      line-height: 1.6
-    ul
-      display: grid
-      grid-template-columns: repeat(2, minmax(0, 1fr))
-      gap: 0.75rem
-      list-style: none
-      li
-        border: 1px solid rgba(171, 209, 198, 0.18)
-        border-radius: 0.5rem
-        color: rgba(171, 209, 198, 0.9)
-        font-size: 0.95rem
-        line-height: 1.45
-        padding: 1rem
+    gap: 2rem
+    .block-heading
+      max-width: 56rem
+      width: 100%
+      h3
+        color: $color-white
+        font-size: clamp(1.65rem, 2vw, 2.25rem)
+        font-weight: 900
+        margin-bottom: 1rem
+      p
+        color: $color-text-on-dark
+        line-height: 1.6
+  .project-divider
+    background: linear-gradient(90deg, $highlight-strong, $border-soft-subtle, transparent)
+    display: block
+    height: 1px
+    width: 100%
   .carousel-shell
+    --carousel-edge: 10rem
+    --carousel-padding: 15rem
+    --carousel-arrow-size: 2.5rem
     position: relative
+    width: 100vw
+    margin-left: calc(50% - 50vw)
+    margin-right: calc(50% - 50vw)
+    &::before, &::after
+      bottom: 0
+      content: ''
+      pointer-events: none
+      position: absolute
+      top: 0
+      width: var(--carousel-edge)
+      z-index: 2
+    &::before
+      background: linear-gradient(90deg, $color-primary, $color-primary-gradient, transparent)
+      left: 0
+    &::after
+      background: linear-gradient(270deg, $color-primary, $color-primary-gradient, transparent)
+      right: 0
   .cards-row
     display: grid
-    grid-auto-columns: minmax(34rem, 42rem)
+    grid-auto-columns: clamp(16rem, 24vw, 19rem)
     grid-auto-flow: column
-    gap: 1.5rem
+    gap: clamp(1rem, 1.6vw, 1.5rem)
     overflow-x: auto
-    padding: 0.25rem 0 1.25rem
+    padding: 0.35rem var(--carousel-padding) 0.8rem
     scroll-behavior: smooth
+    scroll-padding-inline: var(--carousel-padding)
     scroll-snap-type: x mandatory
-    scrollbar-width: thin
-    scrollbar-color: $color-highlight rgba(171, 209, 198, 0.14)
+    scrollbar-width: none
+    &::-webkit-scrollbar
+      display: none
   .carousel-arrow
     align-items: center
-    background-color: $color-highlight
-    border-radius: 50%
+    background: transparent
+    border-radius: 0
     color: $color-dark
     display: flex
-    font-size: 2rem
+    font-size: 1.45rem
     font-weight: 900
-    height: 3rem
+    height: 100%
     justify-content: center
     padding: 0
     position: absolute
-    top: 50%
-    transform: translateY(-50%)
-    width: 3rem
-    z-index: 2
+    top: 0
+    width: var(--carousel-edge)
+    z-index: 3
+    transition: color 0.2s ease, opacity 0.2s ease
+    &::before
+      background-color: $color-highlight
+      border-radius: 50%
+      box-shadow: 0 0 0 $highlight-transparent
+      content: ''
+      height: var(--carousel-arrow-size)
+      left: 50%
+      position: absolute
+      top: 50%
+      transform: translate(-50%, -50%)
+      transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease
+      width: var(--carousel-arrow-size)
+      z-index: -1
+    &:hover
+      box-shadow: none
+      &::before
+        box-shadow: 0 0 2.75rem $highlight-glow
+        transform: translate(-50%, -50%) scale(1.08)
+    &:active
+      transform: scale(1)
+      &::before
+        transform: translate(-50%, -50%) scale(0.96)
+    &.hidden
+      opacity: 0
+      pointer-events: none
     &.left
-      left: -1.5rem
+      left: 0
     &.right
-      right: -1.5rem
+      right: 0
   .project-card
     scroll-snap-align: start
-    display: grid
-    grid-template-columns: minmax(12rem, 0.85fr) 1.15fr
-    gap: 1rem
-    border: 1px solid rgba(171, 209, 198, 0.18)
-    border-radius: 0.75rem
-    background-color: rgba(0, 30, 29, 0.18)
-    padding: 1rem
+    display: flex
+    flex-direction: column
+    border: 1px solid $border-soft
+    border-radius: 0.5rem
+    background: $surface-dark
+    min-height: 100%
+    overflow: hidden
     cursor: pointer
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease
     &:hover
       border-color: $color-highlight
-      box-shadow: 0 1.5rem 3rem rgba(0, 30, 29, 0.18)
+      box-shadow: 0 1.5rem 3rem $shadow-dark
       transform: translateY(-0.2rem)
     .thumbnail
-      min-height: 17rem
+      aspect-ratio: 16 / 10
       background-position: center
       background-size: cover
-      border-radius: 0.5rem
       &.placeholder
         background-color: $color-secondary
         color: $color-primary
@@ -266,22 +376,23 @@ body.no-scroll
     .content
       display: flex
       flex-direction: column
-      justify-content: center
-      padding: 1rem
+      flex: 1
+      padding: 1.1rem
       span
         color: $color-highlight
-        font-size: 0.82rem
+        font-size: 0.76rem
         font-weight: 900
         text-transform: uppercase
       h4
         color: $color-white
-        font-size: 1.45rem
+        font-size: 1.05rem
         font-weight: 900
-        margin: 0.75rem 0 1rem
+        line-height: 1.2
+        margin: 0.45rem 0 0.65rem
       p
-        color: rgba(171, 209, 198, 0.84)
-        font-size: 0.98rem
-        line-height: 1.55
+        color: $color-text-on-dark
+        font-size: 0.88rem
+        line-height: 1.45
   .reader
     .container
       z-index: 15
@@ -299,7 +410,7 @@ body.no-scroll
       color: $color-secondary
       background-color: $color-primary
       overflow-y: auto
-      box-shadow: 0 2rem 6rem rgba(0, 30, 29, 0.35)
+      box-shadow: 0 2rem 6rem $shadow-dark-strong
       .type
         color: $color-highlight
         font-size: 0.85rem
@@ -335,7 +446,7 @@ body.no-scroll
       ::-webkit-scrollbar
         width: 5px
         height: 5px
-        background: rgba(0, 0, 0, 0)
+        background: $surface-transparent
       ::-webkit-scrollbar-thumb
         border-radius: 1rem
         background: $color-highlight
@@ -348,7 +459,7 @@ body.no-scroll
       left: 0
       height: 100%
       width: 100%
-      background-color: rgba(0, 30, 29, 0.75)
+      background-color: $overlay-dark
       backdrop-filter: blur(7.5px)
   .tags
     display: flex
@@ -369,26 +480,29 @@ body.no-scroll
         font-size: 0.825rem
         font-weight: 800
   @media (max-width: $xl)
+    .carousel-shell
+      --carousel-padding: 10rem
     .cards-row
-      grid-auto-columns: minmax(30rem, 75vw)
+      grid-auto-columns: clamp(15.5rem, 24vw, 18.5rem)
   @media (max-width: $l)
+    .carousel-shell
+      --carousel-padding: 10rem
     .block-heading
-      grid-template-columns: 1fr
+      max-width: none
       ul
         grid-template-columns: repeat(2, minmax(0, 1fr))
     .reader .container
       padding: 2rem 1.25rem
       width: 95vw
   @media (max-width: $m)
-    gap: 5rem
-    .block-heading ul
-      grid-template-columns: 1fr
-    .project-card
-      grid-template-columns: 1fr
-      .thumbnail
-        min-height: 14rem
+    gap: 6rem
+    .carousel-shell
+      --carousel-edge: 4rem
+      --carousel-padding: 3.75rem
+      --carousel-arrow-size: 2.35rem
     .cards-row
-      grid-auto-columns: minmax(18rem, 88vw)
-    .carousel-arrow
-      display: none
+      grid-auto-columns: minmax(15.5rem, 76vw)
+  @media (max-width: $xs)
+    .carousel-shell
+      --carousel-padding: 2rem
 </style>

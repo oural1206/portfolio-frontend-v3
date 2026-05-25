@@ -30,7 +30,7 @@ onMounted(() => {
     <div class="text">
       <h1>
         <span class="intro">Hey, moi c'est<br></span>
-        <span class="highlight">Jules</span> Jardri
+        <span class="first-name">Jules</span> Jardri
       </h1>
       <h2>Etudiant en 1re annee de BUT GEII</h2>
       <p class="school">
@@ -96,7 +96,7 @@ onMounted(() => {
     inset: 0
     pointer-events: none
     opacity: 0.16
-    background-image: linear-gradient(rgba(171, 209, 198, 0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(171, 209, 198, 0.16) 1px, transparent 1px)
+    background-image: linear-gradient($border-soft-subtle 1px, transparent 1px), linear-gradient(90deg, $border-soft-subtle 1px, transparent 1px)
     background-size: 4rem 4rem
   .text
     position: relative
@@ -111,7 +111,7 @@ onMounted(() => {
         font-size: 3rem
         display: block
         margin-bottom: 1rem
-      .highlight
+      .first-name
         color: $color-highlight
     h2
       font-size: 1.45rem
@@ -122,7 +122,7 @@ onMounted(() => {
       margin-top: 0.35rem
     p.intro
       max-width: 42rem
-      color: rgba(171, 209, 198, 0.88)
+      color: $color-text-on-dark
       line-height: 1.65
       margin-top: 2rem
     .actions
@@ -144,10 +144,10 @@ onMounted(() => {
           transform: translateY(-0.15rem)
     .primary-action
       background-color: $color-highlight
-      box-shadow: 0 1rem 2.5rem rgba(249, 188, 96, 0.18)
+      box-shadow: 0 1rem 2.5rem $highlight-glow
       color: $color-dark
     .secondary-action
-      border: 1px solid rgba(171, 209, 198, 0.26)
+      border: 1px solid $border-soft
       color: $color-white
       &:hover
         border-color: $color-highlight
@@ -158,7 +158,7 @@ onMounted(() => {
       list-style: none
       margin-top: 2.5rem
       li
-        border: 1px solid rgba(171, 209, 198, 0.2)
+        border: 1px solid $border-soft
         border-radius: 999px
         color: $color-secondary
         font-size: 0.9rem
@@ -175,17 +175,17 @@ onMounted(() => {
       position: relative
       overflow: hidden
       width: min(25rem, 100%)
-      border: 1px solid rgba(171, 209, 198, 0.2)
+      border: 1px solid $border-soft
       border-radius: 1.1rem
-      background-color: rgba(0, 30, 29, 0.22)
+      background-color: $surface-dark
       padding: 1rem
-      box-shadow: 0 2rem 5rem rgba(0, 30, 29, 0.28)
+      box-shadow: 0 2rem 5rem $shadow-dark-strong
       transform: rotate(-2deg)
       .green-overlay
         border-radius: 0.75rem
         position: absolute
         inset: 0
-        background-color: rgba(0, 70, 67, 0.25)
+        background-color: $surface-primary-medium
         filter: blur(1.5rem)
         z-index: 0
       img
@@ -204,11 +204,11 @@ onMounted(() => {
       position: absolute
       z-index: 2
       li
-        background-color: rgba(0, 30, 29, 0.42)
+        background-color: $surface-dark-strong
         backdrop-filter: blur(18px)
-        border: 1px solid rgba(171, 209, 198, 0.22)
+        border: 1px solid $border-soft
         border-radius: 0.75rem
-        box-shadow: 0 1rem 2.5rem rgba(0, 30, 29, 0.24), 0 0 2.5rem rgba(249, 188, 96, 0.08)
+        box-shadow: 0 1rem 2.5rem $shadow-dark, 0 0 2.5rem $highlight-glow
         padding: 0.85rem 1rem
         width: 10rem
         .value

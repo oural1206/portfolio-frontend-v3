@@ -23,14 +23,19 @@ watch(currentExperience, (newValue) => {
   <section id="experiences" class="header-display experiences-section">
     <div class="title">
       <h2>Expériences en milieu professionnel</h2>
-      <p>Plusieurs stages m'ont permis de découvrir des environnements techniques différents, du développement web aux réseaux informatiques.</p>
+      <p>
+        J'ai effectué de nombreux stages dans différentes entreprises de différents secteurs.
+        <br><br>
+        Ces éxpériences m'ont beaucoup aporté en <strong class="dark-bg">savoir être</strong>, en me permetant de me <strong class="dark-bg">familiariser avec le monde professionnel</strong> et le travail en équipe.
+      </p>
     </div>
 
     <div class="list">
       <article v-for="(item, index) in experiences" :key="index" class="item" @click="currentExperience = item">
         <NuxtImg :src="`/assets/company-logos/${item.image}`" :alt="`Logo de l'entreprise ${item.name}`" />
         <p v-html="item.description" />
-        <strong>{{ item.year }}</strong>
+        <span class="datelocation">{{ item["date&location"] }}</span>
+        <span class="year">{{ item.year }}</span>
       </article>
     </div>
 
@@ -58,21 +63,20 @@ watch(currentExperience, (newValue) => {
   gap: 4rem
   @include padding
   .title
-    max-width: 52rem
     h2
       margin-bottom: 1rem
       @include section-title-dark
     p
-      color: rgba(171, 209, 198, 0.86)
+      color: $color-text-on-dark
   .list
     display: grid
     grid-template-columns: repeat(5, minmax(0, 1fr))
     gap: 1rem
     .item
       min-height: 16rem
-      border: 1px solid rgba(171, 209, 198, 0.18)
+      border: 1px solid $border-soft
       border-radius: 0.75rem
-      background-color: rgba(0, 30, 29, 0.18)
+      background-color: $surface-dark
       padding: 1.5rem
       cursor: pointer
       display: flex
@@ -88,10 +92,12 @@ watch(currentExperience, (newValue) => {
         object-fit: contain
         object-position: left center
       p
-        color: rgba(171, 209, 198, 0.82)
+        color: $color-text-on-dark
         font-size: 0.92rem
         line-height: 1.45
-      strong
+      .datelocation
+        font-weight: 600
+      .year
         color: $color-highlight
         font-size: 2.2rem
         font-weight: 950
@@ -112,7 +118,7 @@ watch(currentExperience, (newValue) => {
       overflow-y: auto
       color: $color-primary
       background-color: $color-secondary
-      box-shadow: 0 2rem 6rem rgba(0, 30, 29, 0.35)
+      box-shadow: 0 2rem 6rem $shadow-dark-strong
       h1
         color: $color-primary
         font-size: 2.35rem
@@ -123,7 +129,7 @@ watch(currentExperience, (newValue) => {
         font-weight: 800
         margin-bottom: 2rem
       p
-        color: rgba(0, 70, 67, 0.78)
+        color: $color-text
         line-height: 1.65
       .close-btn
         position: absolute
@@ -142,7 +148,7 @@ watch(currentExperience, (newValue) => {
       left: 0
       height: 100%
       width: 100%
-      background-color: rgba(0, 30, 29, 0.75)
+      background-color: $overlay-dark
       backdrop-filter: blur(7.5px)
   @media (max-width: $xl)
     .list

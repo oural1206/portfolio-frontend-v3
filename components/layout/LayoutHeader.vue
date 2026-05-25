@@ -22,7 +22,7 @@ let navLinks: HTMLElement[] = []
 let rafId = 0
 let onResize: (() => void) | null = null
 
-const trackedSections = ['about-me', 'projets', 'outils', 'experiences', 'recommandations', 'contact']
+const trackedSections = ['about-me', 'projets', 'competences', 'experiences', 'recommandations', 'contact']
 const sectionActivationOffset = 0.18
 const indicatorProgressLag = 0.82
 
@@ -199,7 +199,7 @@ onBeforeUnmount(() => {
       <NuxtLink to="/#projets" class="unstyled">
         #projets
       </NuxtLink>
-      <NuxtLink to="/#outils" class="unstyled">
+      <NuxtLink to="/#competences" class="unstyled">
         #compétences
       </NuxtLink>
       <NuxtLink to="/#experiences" class="unstyled">
@@ -223,16 +223,16 @@ header
   top: 0
   left: 0
   z-index: 10
-  background-color: rgba(0, 70, 67, 0.94)
+  background-color: $header-primary
   backdrop-filter: blur(18px)
   color: $color-white
   display: flex
   justify-content: space-between
   align-items: center
   padding: 1.25rem 5rem
-  border-bottom: 1px solid rgba(171, 209, 198, 0.12)
+  border-bottom: 1px solid $border-soft-subtle
   &.scrolled
-    box-shadow: 0 0 25px 0 rgba(0, 30, 29, 0.22)
+    box-shadow: 0 0 25px 0 $shadow-dark
   .title
     font-size: 1.375rem
     .section
@@ -248,8 +248,8 @@ header
       bottom: -1.15rem
       height: 0.22rem
       border-radius: 999px
-      background: linear-gradient(90deg, rgba(249, 188, 96, 0), rgba(249, 188, 96, 0.6) 30%, $color-highlight)
-      box-shadow: 0 0 0.65rem rgba(249, 188, 96, 0.22)
+      background: linear-gradient(90deg, $highlight-transparent, $highlight-strong 30%, $color-highlight)
+      box-shadow: 0 0 0.65rem $highlight-glow
       pointer-events: none
       transition: transform 0.22s ease, width 0.22s ease, opacity 0.22s ease
     a

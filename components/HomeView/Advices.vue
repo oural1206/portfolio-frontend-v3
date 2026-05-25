@@ -12,7 +12,7 @@ const advices = ref(advicesData)
 <template>
   <section id="recommandations" class="header-display advices-section">
     <div class="section-heading">
-      <h2>Avis de stages</h2>
+      <h2>Recommandations</h2>
     </div>
     <div class="container">
       <article v-for="(advice, index) in advices" :key="index" class="advice">
@@ -57,7 +57,7 @@ const advices = ref(advicesData)
       padding: 5rem 1.5rem 1.5rem
       position: relative
       .quote
-        color: rgba(0, 70, 67, 0.14)
+        color: $color-text-transparent
         font-family: Georgia, serif
         font-size: 6rem
         line-height: 1
@@ -93,13 +93,13 @@ const advices = ref(advicesData)
         font-weight: 950
         margin-bottom: 0.25rem
       .company-name
-        color: rgba(0, 70, 67, 0.68)
+        color: $color-text
+        font-weight: 800
         display: block
         font-size: 0.92rem
-        font-weight: 600
         margin-bottom: 0.85rem
       p
-        color: rgba(0, 70, 67, 0.72)
+        color: $color-text
         font-size: 0.95rem
         line-height: 1.58
   @media (max-width: $xl)

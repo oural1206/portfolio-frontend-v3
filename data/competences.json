@@ -1,40 +1,217 @@
 [
   {
-    "categoryName": "Electronique",
-    "skills": [
-      { "name": "C++", "icon": "cpp.svg" },
-      { "name": "Arduino", "icon": "arduino.svg" },
-      { "name": "Raspberry Pi", "icon": "raspberrypi.svg" },
-      { "name": "Conceptions electroniques", "icon": "easyeda.svg" }
-    ]
+    "id": "electronique",
+    "categoryName": "Électronique & Systèmes embarqués",
+    "icon": "cpu-chip.svg",
+    "intro": "Dessiner, dimensionner, frabriquer et programmer des cartes électroniques pour toutes sortes d'applications.",
+    "tags": [
+      "Logiciels de CAO",
+      "Microcontroleurs",
+      "routage",
+      "prototypage"
+    ],
+    "detail": {
+      "description": "Je travaille sur la conception de circuits, le routage PCB, la programmation de microcontroleurs et l'integration de composants dans des projets concrets. J'utilise ces competences autant en formation GEII que dans mes projets personnels. En GEII j'apprend tout particulièrement à dimensionner des circuits par rapport à un cahier des charges avec des tolérances...",
+      "tools": [
+        {
+          "name": "C++",
+          "icon": "cpp.svg"
+        },
+        {
+          "name": "Arduino",
+          "icon": "arduino.svg"
+        },
+        {
+          "name": "Raspberry Pi",
+          "icon": "raspberrypi.svg"
+        },
+        {
+          "name": "STM32",
+          "icon": "stmicroelectronics.svg"
+        },
+        {
+          "name": "KiCad",
+          "icon": "kicad.svg"
+        },
+        {
+          "name": "Proteus",
+          "icon": "proteus.svg"
+        },
+        {
+          "name": "EasyEDA",
+          "icon": "easyeda.svg"
+        }
+      ],
+      "notions": [
+        "Dessin de circuits",
+        "Routage de PCB",
+        "Programmation de microcontroleurs",
+        "Utilisation d'appareilles de mesure",
+        "Calcul de dimenssionnement",
+        "Fabrication de cartes & prototypage"
+      ]
+    }
   },
   {
-    "categoryName": "Programmation &<br>web",
-    "skills": [
-      { "name": "Nuxt (Vue.js)", "icon": "nuxtjs.svg" },
-      { "name": "AdonisJS", "icon": "adonisjs.svg" },
-      { "name": "Lua", "icon": "lua.svg" },
-      { "name": "PHP", "icon": "php.svg" },
-      { "name": "Git", "icon": "git.svg" },
-      { "name": "VS Code / workflow dev", "icon": "github.svg" }
-    ]
+    "id": "automatisme",
+    "categoryName": "Automatisation & Robotique",
+    "icon": "adjustments-vertical.svg",
+    "intro": "Lire des schémas industriels, programmer un automate et selectionner les composants adaptés ainsi que leurs cablages pour automatiser un processus.",
+    "tags": [
+      "Grafcet",
+      "Ladder",
+      "SCL",
+      "TIA Portal",
+      "Universal Robots"
+    ],
+    "detail": {
+      "description": "Je developpe mes competences en automatisme avec la lecture de schemas de cablage, la logique de commande et les bases de programmation d'automates. C'est le domaine que je veux approfondir dans mon parcours AII.",
+      "tools": [
+        {
+          "name": "TIA Portal",
+          "icon": "siemens.svg"
+        },
+        {
+          "name": "Universal Robots",
+          "icon": "universalrobots.svg"
+        }
+      ],
+      "notions": [
+        "Guide d'étude GEMMA",
+        "Schéma électrique et pneumatique",
+        "Programmation d'automates (Ladder, Grafcet, SCL)",
+        "Base en robots collaboratifs (COBOTS)"
+      ]
+    }
   },
   {
-    "categoryName": "Systemes embarques &<br>tests",
-    "skills": [
-      { "name": "Mesure et validation", "icon": "arduino.svg" },
-      { "name": "Prototypage", "icon": "raspberrypi.svg" },
-      { "name": "Bash", "icon": "bash.svg" },
-      { "name": "Docker", "icon": "docker.svg" }
-    ]
+    "id": "programmation",
+    "categoryName": "Programmation & Workflow",
+    "icon": "command-line.svg",
+    "intro": "Développer, deployer et maintenir des applications, site web et API en utilisant les bonnes pratiques de developpement et de gestion de projet.",
+    "tags": [
+      "Node.js",
+      "Python",
+      "C++",
+      "SQL",
+      "Git",
+      "UNIX",
+      "Docker"
+    ],
+    "detail": {
+      "description": "Au-dela des frameworks, j'accorde beaucoup d'importance au workflow : versionner correctement, travailler avec Git, utiliser le terminal, automatiser certaines taches et structurer un projet proprement.",
+      "tools": [
+        {
+          "name": "Nuxt (Vue.js)",
+          "icon": "nuxtjs.svg"
+        },
+        {
+          "name": "AdonisJS",
+          "icon": "adonisjs.svg"
+        },
+        {
+          "name": "PHP",
+          "icon": "php.svg"
+        },
+        {
+          "name": "Python",
+          "icon": "python.svg"
+        },
+        {
+          "name": "C++",
+          "icon": "cpp.svg"
+        },
+        {
+          "name": "SQL",
+          "icon": "sqlite.svg"
+        },
+        {
+          "name": "Git",
+          "icon": "git.svg"
+        },
+        {
+          "name": "Système UNIX (Bash)",
+          "icon": "bash.svg"
+        },
+        {
+          "name": "Docker",
+          "icon": "docker.svg"
+        }
+      ],
+      "notions": [
+        "Deploiement automatisé (CI/CD tools)",
+        "Versionning avec Git",
+        "Maitrise des commandes et des systèmes UNIX",
+        "Structuration de projet",
+        "Utilisation réfléchie de l'IA"
+      ]
+    }
   },
   {
-    "categoryName": "Conception &<br>creation",
-    "skills": [
-      { "name": "Figma", "icon": "figma.svg" },
-      { "name": "Fusion 360 / impression 3D", "icon": "fusion360.svg" },
-      { "name": "DaVinci Resolve", "icon": "davinciresolve.svg" },
-      { "name": "Lightroom / photo", "icon": "lightroom.svg" }
-    ]
+    "id": "conception",
+    "categoryName": "Conception 3D & Fabrication",
+    "icon": "cube.svg",
+    "intro": "Modéliser des pièces 3D sur mesure en prenant en compte l'intégration de composants et les méthodes de fabrication.",
+    "tags": [
+      "Impression 3D",
+      "Fusion 360",
+      "Catia",
+      "Découpe laser"
+    ],
+    "detail": {
+      "description": "Je conçois des pieces en prenant en compte l'encombrement, l'acces aux connecteurs, les fixations, l'assemblage et les composants electroniques a integrer. Le but est de passer rapidement d'une idee a un objet concret.",
+      "tools": [
+        {
+          "name": "Fusion 360",
+          "icon": "fusion360.svg"
+        },
+        {
+          "name": "CATIA",
+          "icon": "dassaultsystemes.svg"
+        }
+      ],
+      "notions": [
+        "Contraintes mecaniques",
+        "Contraintes de fabrication",
+        "Assemblage et fixations",
+        "Intégration des composants"
+      ]
+    }
+  },
+  {
+    "id": "audiovisuel",
+    "categoryName": "Design & Création audiovisuelle",
+    "icon": "film.svg",
+    "intro": "Créer des visuels propres, présenter clairement un projet technique, réaliser et monter des vidéos.",
+    "tags": [
+      "Figma",
+      "DaVinci Resolve",
+      "Lightroom",
+      "Drone"
+    ],
+    "detail": {
+      "description": "La video, la photo et le design me permettent de mieux raconter et valoriser mes projets. Ces pratiques developpent mon sens du detail, ma creativite et ma capacite a produire un rendu propre.",
+      "tools": [
+        {
+          "name": "DaVinci Resolve",
+          "icon": "davinciresolve.svg"
+        },
+        {
+          "name": "Figma",
+          "icon": "figma.svg"
+        },
+        {
+          "name": "Lightroom",
+          "icon": "lightroom.svg"
+        }
+      ],
+      "notions": [
+        "Montage",
+        "Cadrage",
+        "Etalonnage",
+        "Design d'interface",
+        "Composition visuelle"
+      ]
+    }
   }
 ]

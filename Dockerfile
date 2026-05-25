@@ -12,7 +12,7 @@ WORKDIR /app
 ADD package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 COPY ./ .
-RUN npm run build
+RUN LAST_UPDATED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)" npm run build
 
 FROM base
 ENV PORT=3000
