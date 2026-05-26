@@ -4,7 +4,6 @@
    Presente les projets de formation et personnels avec le meme systeme de carte.
    ========================================================================== */
 
-const img = useImage()
 const { data: formationProjects } = await useAsyncData(() => queryCollection('formationProductions').all())
 const { data: personalProjects } = await useAsyncData(() => queryCollection('personalProductions').all())
 
@@ -86,6 +85,10 @@ function resetAllProjectSliders() {
   })
 }
 
+function getProjectCover(cover: string) {
+  return `/_ipx/f_webp,s_480x300/assets/productions-img/${cover}`
+}
+
 watch(currentProduction, (newValue) => {
   if (newValue) {
     document.body.classList.add('no-scroll')
@@ -134,7 +137,7 @@ watch(currentProduction, (newValue) => {
             class="project-card"
             @click="currentProduction = production"
           >
-            <div v-if="production.meta.cover" class="thumbnail" :style="`background-image: url('${img(`/assets/productions-img/${production.meta.cover}`)}')`" />
+            <div v-if="production.meta.cover" class="thumbnail" :style="`background-image: url('${getProjectCover(production.meta.cover)}')`" />
             <div v-else class="thumbnail placeholder">
               GEII
             </div>
@@ -184,7 +187,7 @@ watch(currentProduction, (newValue) => {
             class="project-card"
             @click="currentProduction = production"
           >
-            <div v-if="production.meta.cover" class="thumbnail" :style="`background-image: url('${img(`/assets/productions-img/${production.meta.cover}`)}')`" />
+            <div v-if="production.meta.cover" class="thumbnail" :style="`background-image: url('${getProjectCover(production.meta.cover)}')`" />
             <div v-else class="thumbnail placeholder">
               Projet
             </div>

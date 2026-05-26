@@ -59,7 +59,16 @@ onMounted(() => {
     <div class="image">
       <div class="profile-card">
         <div class="green-overlay" />
-        <NuxtImg src="/assets/images/profilePicture.png" alt="Portrait de Jules Jardri" />
+        <NuxtImg
+          src="/assets/images/profilePicture.png"
+          alt="Portrait de Jules Jardri"
+          format="webp"
+          quality="88"
+          width="900"
+          height="957"
+          sizes="(max-width: 900px) 80vw, 520px"
+          preload
+        />
       </div>
       <ul class="facts">
         <li v-for="item in quickFacts" :key="item.label">
@@ -189,10 +198,12 @@ onMounted(() => {
         filter: blur(1.5rem)
         z-index: 0
       img
+        display: block
         position: relative
         z-index: 1
         width: 100%
-        aspect-ratio: 1 / 1
+        height: auto
+        aspect-ratio: 1122 / 1193
         object-fit: cover
         border-radius: 0.75rem
     .facts

@@ -31,7 +31,7 @@ const personalBalance = [
           <strong>À l’âge de 10 ans</strong>, j’ai débuté la programmation par blocs avec la robotique Lego EV3, puis j’ai découvert Python et Lua à 12 ans en voulant aller plus loin.
         </p>
         <p>
-          Aujourd’hui, je garde cette même logique : <strong>apprendre par projet</strong>, tester, corriger et fabriquer plein de petits prototypes dans ma chambre <i>(<ImageModal src="/assets/images/atelier-placeholder.svg" alt="Apercu de mon atelier" title="Ma chambre-atelier" description="Un exemple rapide du type d'image que ce lien peut ouvrir. Remplace simplement le fichier par une vraie photo quand tu veux.">qui ressemble plus à un atelier</ImageModal>)</i>.
+          Aujourd’hui, je garde cette même logique : <strong>apprendre par projet</strong>, tester, corriger et fabriquer plein de petits prototypes dans ma chambre <i>(<ImageModal src="/assets/images/atelier.jpeg" title="Apercu de mon atelier...">qui ressemble plus à un atelier</ImageModal>)</i>.
         </p>
       </article>
 

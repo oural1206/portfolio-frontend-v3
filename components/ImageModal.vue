@@ -74,7 +74,7 @@ onBeforeUnmount(() => {
         <button type="button" class="close-btn" aria-label="Fermer l'image" @click="closeModal">
           <NuxtImg src="/assets/icons/cross.svg" alt="" aria-hidden="true" />
         </button>
-        <NuxtImg class="preview" :src="props.src" :alt="props.alt ?? props.title" />
+        <NuxtImg class="preview" format="webp" :src="props.src" :alt="props.alt ?? props.title" />
         <figcaption>
           <span class="caption-text">
             <strong>{{ props.title }}</strong>
