@@ -96,7 +96,7 @@ const personalBalance = [
       max-width: 48rem
   h2, h3
     font-weight: 900
-    margin: 0 0 2rem 0z
+    margin: 0 0 2rem 0
   .about-bento
     display: grid
     grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr)
