@@ -87,7 +87,6 @@ onBeforeUnmount(() => {
           <span class="icon-box">
             <NuxtImg :src="`/assets/skills-icons/${category.icon}`" :alt="`Icone ${category.categoryName}`" />
           </span>
-          <NuxtImg class="open-indicator" src="/assets/icons/arrow-up-right.svg" alt="" aria-hidden="true" />
         </span>
 
         <span class="card-content">
@@ -101,6 +100,11 @@ onBeforeUnmount(() => {
               {{ tag }}
             </span>
           </span>
+        </span>
+
+        <span class="card-action" aria-hidden="true">
+          Voir le détail
+          <NuxtImg src="/assets/icons/arrow-up-right.svg" alt="" />
         </span>
       </button>
     </div>
@@ -168,47 +172,101 @@ onBeforeUnmount(() => {
     gap: 1rem
   .competence-card
     @include surface-light
+    --card-accent: #{$color-highlight}
+    --card-accent-soft: rgba(249, 188, 96, 0.22)
     align-items: stretch
-    background-color: $surface-white-glass
-    border-radius: 0.75rem
+    background: linear-gradient(145deg, rgba(255, 255, 254, 0.58), rgba(255, 255, 254, 0.16))
+    border-radius: 0.5rem
     color: $color-primary
     display: grid
-    grid-template-rows: auto 1fr auto
+    grid-template-rows: auto 1fr auto auto
+    isolation: isolate
     min-height: 17rem
+    overflow: hidden
     padding: 1.35rem
+    position: relative
     text-align: left
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease
+    &::before
+      background: linear-gradient(90deg, var(--card-accent), var(--card-accent-soft), $surface-transparent)
+      content: ''
+      height: 0.24rem
+      left: 0
+      position: absolute
+      right: 0
+      top: 0
+      transform: scaleX(0.35)
+      transform-origin: left
+      transition: transform 0.25s ease
+      z-index: 0
+    &::after
+      background: radial-gradient(circle at 100% 100%, var(--card-accent-soft), $surface-transparent 58%)
+      bottom: 0
+      content: ''
+      height: 72%
+      opacity: 0
+      position: absolute
+      right: 0
+      transition: opacity 0.25s ease
+      width: 82%
+      z-index: 0
     &:hover
-      border-color: $color-highlight
-      box-shadow: 0 1.25rem 3rem $shadow-primary-soft
-      transform: translateY(-0.2rem)
+      border-color: var(--card-accent)
+      box-shadow: 0 1.8rem 3.8rem $shadow-primary-soft, inset 0 0 0 1px var(--card-accent-soft)
+      transform: translateY(-0.35rem)
+      &::before
+        transform: scaleX(1)
+      &::after
+        opacity: 1
+      .icon-box
+        background-color: $color-primary
+        border-color: var(--card-accent)
+        box-shadow: 0 0.8rem 1.5rem $shadow-primary-soft
+        img
+          filter: $filter-secondary
+      .tag-row span
+        background-color: rgba(255, 255, 254, 0.38)
+        border-color: rgba(0, 70, 67, 0.24)
+      .card-action
+        background-color: $color-primary
+        color: $color-secondary
+        transform: translateY(0)
+        img
+          filter: $filter-secondary
+          transform: translate(0.12rem, -0.12rem)
     &:active
       transform: translateY(-0.1rem)
+    &:focus-visible
+      border-color: $color-highlight
+      box-shadow: 0 0 0 0.2rem $highlight-glow, 0 1.25rem 3rem $shadow-primary-soft
+      outline: none
   .card-top
     align-items: center
     display: flex
     justify-content: space-between
     margin-bottom: 2rem
+    position: relative
+    z-index: 1
   .icon-box
     align-items: center
     border: 1px solid $border-primary
-    border-radius: 0.65rem
+    border-radius: 0.5rem
     display: flex
     height: 3rem
     justify-content: center
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease
     width: 3rem
     img
       filter: $filter-primary
       height: 1.45rem
+      transition: filter 0.2s ease
       width: 1.45rem
-  .open-indicator
-    filter: $filter-primary
-    height: 1.1rem
-    width: 1.1rem
   .card-content
     display: flex
     flex-direction: column
     gap: 0.9rem
+    position: relative
+    z-index: 1
     strong
       background: none
       color: $color-primary
@@ -217,6 +275,7 @@ onBeforeUnmount(() => {
       line-height: 1.1
       min-height: 3.5rem
       text-transform: uppercase
+      text-wrap: balance
     > span
       color: $color-text
       font-size: 0.92rem
@@ -228,18 +287,48 @@ onBeforeUnmount(() => {
     justify-content: flex-end
     margin-top: 1.75rem
     min-height: 4.75rem
+    position: relative
+    z-index: 1
     .tag-row
       display: flex
       flex-wrap: wrap
       gap: 0.45rem
     .tag-row span
-      border: 1px solid $border-primary
+      background-color: rgba(255, 255, 254, 0.22)
+      border: 1px solid rgba(0, 70, 67, 0.12)
       border-radius: 999px
       color: $color-text
       font-size: 0.68rem
       font-weight: 850
       padding: 0.28rem 0.5rem
       text-transform: uppercase
+      transition: background-color 0.2s ease, border-color 0.2s ease
+  .card-action
+    align-items: center
+    align-self: end
+    background-color: rgba(0, 70, 67, 0.08)
+    border: 1px solid rgba(0, 70, 67, 0.1)
+    border-radius: 999px
+    color: $color-primary
+    display: inline-flex
+    font-size: 0.78rem
+    font-weight: 950
+    gap: 0.45rem
+    justify-content: center
+    justify-self: start
+    letter-spacing: 0.03em
+    margin-top: 1.2rem
+    padding: 0.55rem 0.8rem
+    position: relative
+    text-transform: uppercase
+    transform: translateY(0.12rem)
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease
+    z-index: 1
+    img
+      filter: $filter-primary
+      height: 0.78rem
+      transition: filter 0.2s ease, transform 0.2s ease
+      width: 0.78rem
 
 .competence-reader
   .background
