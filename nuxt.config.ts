@@ -3,7 +3,7 @@ import process from 'node:process'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 // Expose la date de mise a jour pour l'affichage global du site. (pour le footer)
-const lastUpdatedAt = process.env.LAST_UPDATED_AT || 'date manquante'
+const lastUpdatedAt = process.env.LAST_UPDATED_AT
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',

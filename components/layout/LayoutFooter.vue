@@ -9,6 +9,8 @@
 const { public: publicConfig } = useRuntimeConfig()
 
 const formattedLastUpdatedAt = computed(() => {
+  if (!publicConfig.lastUpdatedAt)
+    return 'date manquante'
   return new Intl.DateTimeFormat('fr-FR', {
     day: '2-digit',
     month: 'long',

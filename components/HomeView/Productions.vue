@@ -21,8 +21,6 @@ function setProjectSlider(key: string, element: Element | ComponentPublicInstanc
   else {
     projectSliders.value[key] = null
   }
-
-  updateProjectSliderState(key)
 }
 
 function updateProjectSliderState(key: string) {
@@ -222,7 +220,7 @@ watch(currentProduction, (newValue) => {
             <span>{{ tag.name }}</span>
           </li>
         </ul>
-        <ContentRenderer class="content" :value="currentProduction" />
+        <div class="content" v-html="currentProduction.contentHtml" />
       </div>
     </div>
   </section>
