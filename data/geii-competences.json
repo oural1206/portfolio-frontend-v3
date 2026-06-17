@@ -1,0 +1,107 @@
+[
+  {
+    "id": "concevoir",
+    "title": "Concevoir",
+    "status": "active",
+    "summary": "Partir d'un besoin, choisir une solution realiste et produire les schemas, prototypes ou dossiers qui la justifient.",
+    "items": [
+      {
+        "id": "C.1",
+        "title": "Identifier les fonctions demandees",
+        "originalTitle": "J'identifie les fonctions demandées à la lecture du cahier des charges (architecture fonctionnelle -sans solution technique)"
+      },
+      {
+        "id": "C.2",
+        "title": "Proposer une solution technique",
+        "originalTitle": "Je propose une solution technique pour répondre à une fonction"
+      },
+      {
+        "id": "C.3",
+        "title": "Affiner une solution technique",
+        "originalTitle": "J'affine une solution technique en m'appuyant sur un maquettage numérique et/ou matériel"
+      },
+      {
+        "id": "C.4",
+        "title": "Rediger un dossier de conception",
+        "originalTitle": "Je rédige un dossier de conception et de fabrication"
+      }
+    ]
+  },
+  {
+    "id": "verifier",
+    "title": "Verifier",
+    "status": "active",
+    "summary": "Mettre un prototype a l'epreuve avec des mesures, relever les ecarts et corriger ce qui ne respecte pas le besoin.",
+    "items": [
+      {
+        "id": "V.1",
+        "title": "Appliquer une procedure d'essais",
+        "originalTitle": "J'applique, j'élabore, je rédige une procédure d'essais"
+      },
+      {
+        "id": "V.2",
+        "title": "Corriger les non-conformites",
+        "originalTitle": "J'identifie, je corrige les non-conformités d'un prototype"
+      }
+    ]
+  },
+  {
+    "id": "maintenir",
+    "title": "Maintenir",
+    "status": "locked",
+    "summary": "Lire l'etat d'un systeme, diagnostiquer une panne ou une usure, puis remettre l'installation dans un fonctionnement fiable.",
+    "items": [
+      {
+        "id": "M.1",
+        "title": "Appliquer une operation de maintenance",
+        "originalTitle": "J'applique une opération de maintenance (préventive, corrective, améliorative) à un système"
+      },
+      {
+        "id": "M.2",
+        "title": "Rediger une procedure de maintenance",
+        "originalTitle": "Je rédige la procédure de maintenance (préventive, corrective, améliorative) d'un système"
+      }
+    ]
+  },
+  {
+    "id": "integrer",
+    "title": "Integrer",
+    "status": "locked",
+    "summary": "Installer un systeme automatise sur site, le raccorder proprement et organiser sa mise en service avec les documents associes.",
+    "items": [
+      {
+        "id": "I.1.1",
+        "title": "Executer l'installation et la mise en service",
+        "originalTitle": "J'exécute l'installation et la mise en service d'un système"
+      },
+      {
+        "id": "I.1.2",
+        "title": "Gerer le processus d'installation",
+        "originalTitle": "Je gère le processus d'installation et de mise en service d'un système"
+      }
+    ]
+  },
+  {
+    "id": "manager",
+    "title": "Manager",
+    "status": "locked",
+    "summary": "Documenter le travail, organiser les echanges et prendre en compte les contraintes humaines, budgetaires et environnementales.",
+    "items": [
+      {
+        "id": "G.1",
+        "title": "Rediger et archiver des documents",
+        "originalTitle": "Je rédige et archive différents documents professionnels (e-mails, supports de présentations, comptes rendus, rapports...) établis dans différentes langues (Français, Anglais, Espagnol, Chinois, etc...)"
+      },
+      {
+        "id": "G.2",
+        "title": "Effectuer des taches administratives",
+        "originalTitle": "J'effectue des tâches administratives (passer des commandes, demander un devis, gestion d'un budget, ...)"
+      },
+      {
+        "id": "G.3",
+        "title": "Privilegier une demarche ethique",
+        "originalTitle": "Je privilégie une démarche éthique pour répondre aux enjeux économiques, réglementaires et environnementaux de la Société."
+      }
+    ]
+  }
+]

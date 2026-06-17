@@ -21,10 +21,17 @@ strong
   color: $color-primary
   font-weight: 700
   &.dark-bg
-    color: $color-white
+    color: $color-text-on-highlight
 
 strong, .highlight
   background: linear-gradient(180deg, transparent 52%, $highlight-mark 52%)
+
+strong.dark-bg, .highlight.dark-bg
+  background: linear-gradient(180deg, transparent 8%, $color-highlight 8%)
+  border-radius: 0.16em
+  box-decoration-break: clone
+  padding: 0 0.12em
+  -webkit-box-decoration-break: clone
 
 a:not(.unstyled), .image-text-link
   font-weight: 600
@@ -99,7 +106,7 @@ input, textarea
 
 button
   background-color: $color-highlight
-  color: $color-dark
+  color: $color-text-on-highlight
   border-radius: 3.75px
   font-weight: 900
   font-size: 1rem

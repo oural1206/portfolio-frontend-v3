@@ -10,5 +10,9 @@ export default defineContentConfig({
       source: 'productions/perso/*.md',
       type: 'page',
     }),
+    geiiCompetences: defineCollection({
+      source: 'competences/geii/*.md',
+      type: 'page',
+    }),
   },
 })

@@ -14,6 +14,8 @@ const projectSliderState = ref<Record<string, { canScrollLeft: boolean, canScrol
   personal: { canScrollLeft: false, canScrollRight: false },
 })
 
+// ===================== CARROUSELS ===================== //
+
 function setProjectSlider(key: string, element: Element | ComponentPublicInstance | null) {
   if (element instanceof HTMLElement) {
     projectSliders.value[key] = element
@@ -87,6 +89,12 @@ function getProjectCover(cover: string) {
   return `/_ipx/f_webp,s_480x300/assets/productions-img/${cover}`
 }
 
+// ===================== MODALE DE PROJET ===================== //
+
+function closeProduction() {
+  currentProduction.value = null
+}
+
 watch(currentProduction, (newValue) => {
   if (newValue) {
     document.body.classList.add('no-scroll')
@@ -94,6 +102,10 @@ watch(currentProduction, (newValue) => {
   else {
     document.body.classList.remove('no-scroll')
   }
+})
+
+onBeforeUnmount(() => {
+  document.body.classList.remove('no-scroll')
 })
 </script>
 
@@ -209,9 +221,9 @@ watch(currentProduction, (newValue) => {
     </div>
 
     <div v-if="currentProduction" class="reader">
-      <div class="background" @click="currentProduction = null" />
+      <div class="background" @click="closeProduction" />
       <div class="container">
-        <NuxtImg class="close-btn" src="/assets/icons/cross.svg" alt="Icon fermer" @click="currentProduction = null" />
+        <NuxtImg class="close-btn" src="/assets/icons/cross.svg" alt="Icon fermer" @click="closeProduction" />
         <span class="type">{{ currentProduction.meta.type || 'Projet de formation' }}</span>
         <h1>{{ currentProduction.title }}</h1>
         <ul v-if="currentProduction?.meta.competences?.length" class="tags">
@@ -220,7 +232,7 @@ watch(currentProduction, (newValue) => {
             <span>{{ tag.name }}</span>
           </li>
         </ul>
-        <div class="content" v-html="currentProduction.contentHtml" />
+        <ContentRenderer class="content" :value="currentProduction" />
       </div>
     </div>
   </section>
@@ -252,6 +264,18 @@ body.no-scroll
     display: flex
     flex-direction: column
     gap: 2rem
+    strong.dark-bg, .highlight.dark-bg, .image-text-link.dark-bg
+      background: $color-highlight
+      border-radius: 0.18rem
+      box-decoration-break: clone
+      color: $color-text-on-highlight
+      font-weight: 900
+      padding: 0.02em 0.18em
+      -webkit-box-decoration-break: clone
+    .image-text-link.dark-bg
+      text-decoration-color: $color-text-on-highlight
+      &:hover
+        text-decoration-color: $color-primary
     .block-heading
       max-width: 56rem
       width: 100%

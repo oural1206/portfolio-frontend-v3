@@ -1,10 +1,11 @@
 <script setup lang="ts">
 /* ============================================================================
-   OUTILS ET SAVOIR-FAIRE
-   Presente les domaines de competences sous forme de cartes et detaille en modale.
+   COMPETENCES
+   Separe le referentiel GEII des outils techniques et ouvre les details en modale.
    ========================================================================== */
 
 import competencesData from '~/data/competences.json'
+import geiiCompetencesData from '~/data/geii-competences.json'
 
 interface CompetenceTool {
   name: string
@@ -26,8 +27,45 @@ interface CompetenceCategory {
   detail: CompetenceDetail
 }
 
+interface GeiiCompetenceItem {
+  id: string
+  title: string
+  originalTitle: string
+}
+
+interface GeiiCompetenceGroup {
+  id: string
+  title: string
+  status: 'active' | 'locked'
+  summary: string
+  items: GeiiCompetenceItem[]
+}
+
 const competences = ref<CompetenceCategory[]>(competencesData)
+const geiiCompetences = ref<GeiiCompetenceGroup[]>(geiiCompetencesData as GeiiCompetenceGroup[])
 const currentCompetence = ref<CompetenceCategory | null>(null)
+const currentGeiiItem = ref<GeiiCompetenceItem | null>(null)
+
+const { data: geiiCompetencePages, refresh: refreshGeiiCompetencePages } = await useAsyncData(
+  'geii-competence-pages',
+  () => queryCollection('geiiCompetences').all(),
+)
+
+const currentGeiiPage = computed(() => {
+  if (!currentGeiiItem.value) {
+    return null
+  }
+
+  return geiiCompetencePages.value?.find((page: any) => {
+    const contentKey = getContentKey(currentGeiiItem.value?.id ?? '')
+
+    return getContentCode(page) === currentGeiiItem.value?.id || page.path?.endsWith(`/${contentKey}`)
+  }) ?? null
+})
+
+const isReaderOpen = computed(() => currentCompetence.value !== null || currentGeiiItem.value !== null)
+
+// ===================== ORGANISATION DES CARTES ===================== //
 
 // Range les tags par lignes pour garder l'ordre de lecture tout en chargeant le bas.
 function getTagRows(tags: string[]) {
@@ -42,7 +80,32 @@ function getTagRows(tags: string[]) {
   return rows
 }
 
-// ===================== MODALE DE DETAIL ===================== //
+function getContentCode(page: any) {
+  if (page.code) {
+    return page.code
+  }
+
+  if (page.meta?.code) {
+    return page.meta.code
+  }
+
+  if (typeof page.meta === 'string') {
+    try {
+      return JSON.parse(page.meta).code
+    }
+    catch {
+      return null
+    }
+  }
+
+  return null
+}
+
+function getContentKey(id: string) {
+  return id.replaceAll('.', '').toLowerCase()
+}
+
+// ===================== MODALES DE DETAIL ===================== //
 
 function openCompetence(category: CompetenceCategory) {
   currentCompetence.value = category
@@ -52,7 +115,19 @@ function closeCompetence() {
   currentCompetence.value = null
 }
 
-watch(currentCompetence, (newValue) => {
+async function openGeiiItem(item: GeiiCompetenceItem) {
+  if (!geiiCompetencePages.value?.length) {
+    await refreshGeiiCompetencePages()
+  }
+
+  currentGeiiItem.value = item
+}
+
+function closeGeiiItem() {
+  currentGeiiItem.value = null
+}
+
+watch(isReaderOpen, (newValue) => {
   if (newValue) {
     document.body.classList.add('no-scroll')
   }
@@ -71,43 +146,115 @@ onBeforeUnmount(() => {
     <div class="section-heading center">
       <h2>Des <span class="highlight">compétences concrètes</span> et des outils maitrisés</h2>
       <p>
-        Retrouvez ici les différents domaines de compétences que je maitrise, ainsi que mes outils travail.
+        Une vue d'ensemble de mes savoir-faire techniques ainsi que des preuves associees au referentiel GEII.
       </p>
     </div>
 
-    <div class="competence-grid">
-      <button
-        v-for="category in competences"
-        :key="category.id"
-        type="button"
-        class="competence-card"
-        @click="openCompetence(category)"
-      >
-        <span class="card-top">
-          <span class="icon-box">
-            <NuxtImg :src="`/assets/skills-icons/${category.icon}`" :alt="`Icone ${category.categoryName}`" />
-          </span>
-        </span>
+    <div class="skills-block tools-block">
+      <div class="block-heading">
+        <span class="eyebrow">Technique</span>
+        <h3>Outils et savoir-faire techniques</h3>
+      </div>
 
-        <span class="card-content">
-          <strong>{{ category.categoryName }}</strong>
-          <span>{{ category.intro }}</span>
-        </span>
-
-        <span class="tag-list">
-          <span v-for="(row, rowIndex) in getTagRows(category.tags)" :key="`${category.id}-${rowIndex}`" class="tag-row">
-            <span v-for="tag in row" :key="tag">
-              {{ tag }}
+      <div class="competence-grid">
+        <button
+          v-for="category in competences"
+          :key="category.id"
+          type="button"
+          class="competence-card"
+          @click="openCompetence(category)"
+        >
+          <span class="card-top">
+            <span class="icon-box">
+              <NuxtImg :src="`/assets/skills-icons/${category.icon}`" :alt="`Icone ${category.categoryName}`" />
             </span>
           </span>
-        </span>
 
-        <span class="card-action" aria-hidden="true">
-          Voir le détail
-          <NuxtImg src="/assets/icons/arrow-up-right.svg" alt="" />
-        </span>
-      </button>
+          <span class="card-content">
+            <strong>{{ category.categoryName }}</strong>
+            <span>{{ category.intro }}</span>
+          </span>
+
+          <span class="tag-list">
+            <span v-for="(row, rowIndex) in getTagRows(category.tags)" :key="`${category.id}-${rowIndex}`" class="tag-row">
+              <span v-for="tag in row" :key="tag">
+                {{ tag }}
+              </span>
+            </span>
+          </span>
+
+          <span class="card-action" aria-hidden="true">
+            Voir le détail
+            <NuxtImg src="/assets/icons/arrow-up-right.svg" alt="" />
+          </span>
+        </button>
+      </div>
     </div>
+
+    <div class="skills-block geii-block">
+      <div class="block-heading">
+        <span class="eyebrow">Référentiel</span>
+        <h3>Référentiel GEII et Preuves</h3>
+      </div>
+
+      <div class="geii-grid">
+        <article
+          v-for="group in geiiCompetences"
+          :key="group.id"
+          class="geii-card"
+          :class="{ muted: group.status === 'locked' }"
+        >
+          <header>
+            <span v-if="group.status !== 'active'"> A venir </span>
+            <h4>{{ group.title }}</h4>
+            <p>{{ group.summary }}</p>
+          </header>
+
+          <div class="geii-items">
+            <button
+              v-for="item in group.items"
+              :key="item.id"
+              type="button"
+              class="geii-item"
+              :disabled="group.status !== 'active'"
+              @click="openGeiiItem(item)"
+            >
+              <span class="code">{{ item.id }}</span>
+              <span>
+                <strong>{{ item.title }}</strong>
+              </span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <Teleport to="body">
+      <div v-if="currentGeiiItem" class="competence-reader geii-reader" role="dialog" aria-modal="true" :aria-label="currentGeiiItem.title">
+        <div class="background" @click="closeGeiiItem" />
+        <article class="container">
+          <button type="button" class="close-btn" aria-label="Fermer le detail" @click="closeGeiiItem">
+            <NuxtImg src="/assets/icons/cross.svg" alt="" aria-hidden="true" />
+          </button>
+
+          <header>
+            <span class="detail-code">{{ currentGeiiItem.id }}</span>
+            <div>
+              <span class="eyebrow">Référentiel GEII</span>
+              <h3>{{ currentGeiiItem.originalTitle }}</h3>
+            </div>
+          </header>
+
+          <div v-if="currentGeiiPage" class="geii-content">
+            <ContentRenderer :value="currentGeiiPage" />
+          </div>
+          <div v-else class="geii-content empty-content">
+            <h1>{{ currentGeiiItem.id }} - {{ currentGeiiItem.originalTitle }}</h1>
+            <p>Le contenu Markdown de cette compétence est prêt à être complété.</p>
+          </div>
+        </article>
+      </div>
+    </Teleport>
 
     <Teleport to="body">
       <div v-if="currentCompetence" class="competence-reader" role="dialog" aria-modal="true" :aria-label="currentCompetence.categoryName">
@@ -164,8 +311,138 @@ onBeforeUnmount(() => {
   color: $color-primary
   display: flex
   flex-direction: column
-  gap: 4rem
+  gap: 4.5rem
   @include padding
+  .skills-block
+    display: flex
+    flex-direction: column
+    gap: 1.5rem
+  .block-heading
+    max-width: 56rem
+    .eyebrow
+      color: $color-primary
+      display: block
+      font-size: 0.76rem
+      font-weight: 950
+      letter-spacing: 0.16em
+      margin-bottom: 0.45rem
+      opacity: 0.68
+      text-transform: uppercase
+    h3
+      color: $color-primary
+      font-size: clamp(1.55rem, 2vw, 2.15rem)
+      font-weight: 950
+      line-height: 1.1
+  .geii-grid
+    display: grid
+    grid-template-columns: repeat(6, minmax(0, 1fr))
+    gap: 1.15rem
+  .geii-card
+    @include surface-light
+    background: linear-gradient(145deg, rgba(255, 255, 254, 0.68), rgba(255, 255, 254, 0.18))
+    border-radius: 0.5rem
+    display: flex
+    flex-direction: column
+    gap: 0.95rem
+    min-height: 100%
+    padding: 1rem
+    position: relative
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease
+    &:nth-child(1), &:nth-child(2), &:nth-child(3)
+      grid-column: span 2
+    &:nth-child(4), &:nth-child(5)
+      grid-column: span 3
+    &.muted
+      filter: grayscale(0.8)
+      opacity: 0.58
+      .geii-item
+        cursor: default
+        pointer-events: none
+    &:hover
+      border-color: $color-highlight
+      box-shadow: 0 1.8rem 3.8rem $shadow-primary-soft
+      transform: translateY(-0.2rem)
+    &.muted:hover
+      border-color: $border-primary
+      box-shadow: 0 1.25rem 3rem $shadow-primary-soft
+      transform: none
+    header
+      display: flex
+      flex-direction: column
+      gap: 0.45rem
+      span
+        align-self: flex-start
+        background-color: $surface-primary-soft
+        border: 1px solid $border-primary
+        border-radius: 999px
+        color: $color-primary
+        font-size: 0.62rem
+        font-weight: 950
+        padding: 0.26rem 0.48rem
+        text-transform: uppercase
+      h4
+        color: $color-primary
+        font-size: 1rem
+        font-weight: 950
+        line-height: 1.1
+        text-transform: uppercase
+      p
+        color: $color-text
+        font-size: 0.78rem
+        line-height: 1.35
+        margin-top: 0.1rem
+  .geii-items
+    display: grid
+    gap: 0.45rem
+  .geii-item
+    align-items: center
+    background-color: rgba(255, 255, 254, 0.38)
+    border: 1px solid rgba(0, 70, 67, 0.14)
+    border-radius: 0.45rem
+    box-shadow: none
+    color: $color-primary
+    display: grid
+    gap: 0.5rem
+    grid-template-columns: auto minmax(0, 1fr)
+    min-height: 3.1rem
+    padding: 0.55rem 0.62rem
+    text-align: left
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease
+    &:disabled
+      cursor: default
+    &:hover
+      background-color: rgba(255, 255, 254, 0.56)
+      border-color: rgba(249, 188, 96, 0.55)
+      box-shadow: none
+      transform: translateY(-0.06rem)
+      strong
+        color: $color-primary
+    &:disabled:hover
+      background-color: rgba(255, 255, 254, 0.38)
+      border-color: rgba(0, 70, 67, 0.14)
+      transform: none
+    &:focus-visible
+      border-color: $color-highlight
+      box-shadow: 0 0 0 0.2rem $highlight-glow
+      outline: none
+    .code
+      color: $color-highlight
+      font-size: 0.78rem
+      font-weight: 950
+      line-height: 1.2
+      transition: color 0.2s ease
+    span:not(.code)
+      display: flex
+      flex-direction: column
+      gap: 0.25rem
+      min-width: 0
+    strong
+      background: none
+      color: $color-primary
+      font-size: 0.76rem
+      font-weight: 950
+      line-height: 1.2
+      transition: color 0.2s ease
   .competence-grid
     display: grid
     grid-template-columns: repeat(5, minmax(0, 1fr))
@@ -379,7 +656,7 @@ onBeforeUnmount(() => {
     display: flex
     gap: 1rem
     padding-right: 3rem
-    .detail-icon
+    .detail-icon, .detail-code
       align-items: center
       background-color: $surface-white-soft
       border: 1px solid $border-soft
@@ -388,10 +665,15 @@ onBeforeUnmount(() => {
       height: 3.5rem
       justify-content: center
       width: 3.5rem
-      img
-        filter: $filter-secondary
-        height: 1.7rem
-        width: 1.7rem
+    .detail-icon img
+      filter: $filter-secondary
+      height: 1.7rem
+      width: 1.7rem
+    .detail-code
+      color: $color-highlight
+      flex: 0 0 auto
+      font-size: 0.95rem
+      font-weight: 950
     .eyebrow
       color: $color-highlight
       display: block
@@ -463,15 +745,84 @@ onBeforeUnmount(() => {
         left: 0
         position: absolute
         top: 0
+  .geii-content
+    display: flex
+    flex-direction: column
+    gap: 1.1rem
+    margin-top: 2rem
+    :deep(h1), :deep(h2)
+      color: $color-highlight
+      font-weight: 900
+      margin: 1.5rem 0 0.35rem
+    :deep(h1)
+      font-size: 1.55rem
+    :deep(h2)
+      font-size: 1.25rem
+    :deep(h3)
+      color: $color-white
+      margin-top: 1.1rem
+    :deep(p)
+      color: $color-text-on-dark
+      line-height: 1.75
+    :deep(strong)
+      color: $color-highlight
+      font-weight: 900
+    :deep(ul), :deep(ol)
+      border-left: 0.25rem solid $color-highlight
+      display: grid
+      gap: 0.5rem
+      margin: 0.5rem 0
+      padding-left: 1.25rem
+    :deep(li)
+      color: $color-text-on-dark
+      line-height: 1.55
+    :deep(img)
+      border-radius: 0.5rem
+      display: block
+      margin: 1.5rem auto
+      max-height: 50vh
+      max-width: 75%
+    :deep(span.center)
+      display: block
+      font-weight: 400
+      margin: -0.5rem 0 1.75rem
+      text-align: center
+      width: 100%
+
+.geii-reader
+  .container
+    width: min(72rem, calc(100vw - 2rem))
+  header
+    align-items: flex-start
+    gap: 1.2rem
+    padding-right: 4rem
+    .detail-code
+      height: 3rem
+      margin-top: 0.1rem
+      width: 3rem
+    h3
+      font-size: clamp(1.35rem, 1.45vw, 1.85rem)
+      font-weight: 900
+      line-height: 1.22
+      max-width: 58rem
+      text-transform: none
+      text-wrap: balance
+  .geii-content
+    margin-top: 1.5rem
 
 @media (max-width: $xl)
   .tools-section
     .competence-grid
       grid-template-columns: repeat(3, minmax(0, 1fr))
+    .geii-grid
+      grid-template-columns: repeat(2, minmax(0, 1fr))
+    .geii-card
+      &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5)
+        grid-column: auto
 
 @media (max-width: $m)
   .tools-section
-    .competence-grid
+    .geii-grid, .competence-grid
       grid-template-columns: 1fr
   .competence-reader
     .container
@@ -488,4 +839,12 @@ onBeforeUnmount(() => {
       align-items: flex-start
       flex-direction: column
       padding-right: 2.5rem
+  .geii-reader
+    header
+      gap: 0.85rem
+      .detail-code
+        height: 2.75rem
+        width: 2.75rem
+      h3
+        font-size: 1.2rem
 </style>
