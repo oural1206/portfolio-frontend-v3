@@ -32,7 +32,7 @@ onMounted(() => {
         <span class="intro">Hey, moi c'est<br></span>
         <span class="first-name">Jules</span> Jardri
       </h1>
-      <h2>Etudiant en 1re annee de BUT GEII</h2>
+      <h2>Etudiant en 2ème année de BUT GEII</h2>
       <p class="school">
         <a href="https://www.iut.u-bordeaux.fr/geii/" target="_blank" class="unstyled">
           IUT de Bordeaux — site de Gradignan
