@@ -24,9 +24,9 @@ const links = [
     icon: 'linkedin.svg',
   },
   {
-    label: 'CV en ligne',
+    label: 'CV en PDF',
     value: 'Voir mon CV',
-    href: '/docs/CV_Jules_Jardri.pdf',
+    href: '/docs/CV%20Jules%20JARDRI.pdf',
     icon: 'paper-clip.svg',
   },
 ]
